@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentence Similarity</title>
+    <style>
+      .scrollable {
+        width: 45%;
+        height: 200px;
+        overflow: auto;
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin: 10px;
+      }
+      .embeddings-container {
+        display: flex;
+        justify-content: space-between;
+      }
+      .plot-container {
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Sentence Similarity Calculator</h1>
+    <form method="post">
+      <label for="sentence1">Sentence 1:</label><br>
+      <input type="text" id="sentence1" name="sentence1"><br><br>
+      <label for="sentence2">Sentence 2:</label><br>
+      <input type="text" id="sentence2" name="sentence2"><br><br>
+      <input type="submit" value="Calculate Similarity">
+    </form>
+
+    {% if similarity is not none %}
+      <h2>Results</h2>
+      <div class="embeddings-container">
+        <div class="scrollable">
+          <h3>Embedding for Sentence 1:</h3>
+          <pre>{{ embedding1 }}</pre>
+        </div>
+        <div class="scrollable">
+          <h3>Embedding for Sentence 2:</h3>
+          <pre>{{ embedding2 }}</pre>
+        </div>
+      </div>
+      <p>Cosine Similarity: {{ similarity }}</p>
+      <div class="plot-container">
+        <h3>Embedding Visualization:</h3>
+        <img src="data:image/png;base64,{{ plot_url }}" alt="Embedding plot">
+      </div>
+    {% endif %}
+  </body>
+</html>
